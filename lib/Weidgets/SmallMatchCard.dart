@@ -6,7 +6,16 @@ import '../constant/constants.dart';
 class SmallMatchCard extends StatelessWidget {
   const SmallMatchCard({
     super.key,
+    required this.team1Logo,
+    required this.team2Logo,
+    required this.team1Score,
+    required this.team2Score,
   });
+
+  final String team1Logo;
+  final String team2Logo;
+  final String team1Score;
+  final String team2Score;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +26,8 @@ class SmallMatchCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Image.asset(
-            'Assets/1.png',
+          Image.network(
+            team1Logo,
             height: 5.h,
           ),
           Column(
@@ -26,7 +35,7 @@ class SmallMatchCard extends StatelessWidget {
             children: [
               Text('VS', style: Theme.of(context).textTheme.bodySmall!),
               Text(
-                '0:0',
+                '$team1Score:$team1Score',
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
@@ -35,8 +44,8 @@ class SmallMatchCard extends StatelessWidget {
               Text('21:16', style: Theme.of(context).textTheme.bodySmall!)
             ],
           ),
-          Image.asset(
-            'Assets/pngegg.png',
+          Image.network(
+            team1Logo,
             height: 5.h,
           ),
         ],

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:football/Providers/LiveMatchesProvider.dart';
+import 'package:football/Weidgets/SearchField.dart';
 import 'package:football/constant/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../Weidgets/HeadLineWeidget.dart';
 import '../../../../Weidgets/MatchCardWeidget.dart';
 import '../../../../Weidgets/MatchesPageViewWeidget.dart';
 import '../../../../Weidgets/SmallMatchCard.dart';
@@ -26,6 +30,12 @@ class _MatchesScreenState extends State<MatchesScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    context.read<LiveMatchesProvider>().callMatchesApi();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
@@ -44,35 +54,7 @@ class _MatchesScreenState extends State<MatchesScreen> {
             SizedBox(
               height: 1.h,
             ),
-            SizedBox(
-              height: 5.h,
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                  hintText: 'Search...',
-                  // Add a clear button to the search bar
-                  // fillColor:,
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    onPressed: () => _searchController.clear(),
-                  ),
-                  // Add a search icon or button to the search bar
-                  prefixIcon: IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      // Perform the search here
-                    },
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: kTextHintColor, width: kWidthOfInputBoarder),
-                      borderRadius: kBorderRadiusAll),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
-              ),
-            ),
+            SearchField(),
             SizedBox(height: 2.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,26 +117,40 @@ class _MatchesScreenState extends State<MatchesScreen> {
             SizedBox(
               height: 2.h,
             ),
-            Text('Live Matches',
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+            HeadLineWidget(title: 'Live Matches'),
             SizedBox(
               height: 1.h,
             ),
             SizedBox(
               height: 10.h,
-              child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: PageController(viewportFraction: .5),
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return const SmallMatchCard();
-                  }),
+              child: Consumer<LiveMatchesProvider>(
+                  builder: (_, matchesProvider, __) {
+                return matchesProvider.isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : PageView.builder(
+                        scrollDirection: Axis.horizontal,
+                        controller: PageController(viewportFraction: 0.5),
+                        itemCount: matchesProvider.matchesList.length,
+                        itemBuilder: (context, index) {
+                          return SmallMatchCard(
+                            team1Logo:
+                                matchesProvider.matchesList[index].team1!.logo!,
+                            team2Logo:
+                                matchesProvider.matchesList[index].team2!.logo!,
+                            team1Score: matchesProvider
+                                .matchesList[index].score!.fullTime!.team1!,
+                            team2Score: matchesProvider
+                                .matchesList[index].score!.fullTime!.team2!,
+                          );
+                        });
+              }),
             ),
             SizedBox(
               height: 2.h,
             ),
-            Text('Matches',
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
+            HeadLineWidget(title: 'Matches'),
             ListView.builder(
                 itemCount: 5,
                 physics: const NeverScrollableScrollPhysics(),

@@ -1,6 +1,6 @@
 class ApiConstants {
   static const baseURL = 'https://punchy-sports-254e22549d25.herokuapp.com/';
-  static const sportsNews = '${baseURL}homePage/sports-news';
+  static const liveMatches = '${baseURL}football/liveMatches';
   static const image = '${baseURL}images/';
   static const matchSchedual = '${baseURL}homePage/schedules';
   static const signup = '${baseURL}auth/register';

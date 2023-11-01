@@ -66,23 +66,18 @@ class CustomTheme {
           fontSize: 15.sp, color: kTextWhiteColor, fontWeight: FontWeight.w400),
 
       enabledBorder: OutlineInputBorder(
-          borderSide:
-              const BorderSide(color: kIconcolor, width: kWidthOfInputBoarder),
-          borderRadius: kBorderRadiusAll),
+          borderRadius: kBorderRadiusAll,
+          borderSide: const BorderSide(color: kSecondaryColor)),
       border: OutlineInputBorder(
-          borderSide:
-              const BorderSide(color: kIconcolor, width: kWidthOfInputBoarder),
-          borderRadius: kBorderRadiusAll),
+          borderRadius: kBorderRadiusAll,
+          borderSide: const BorderSide(color: kSecondaryColor)),
       disabledBorder: OutlineInputBorder(
-          borderSide:
-              const BorderSide(color: kIconcolor, width: kWidthOfInputBoarder),
-          borderRadius: kBorderRadiusAll),
-      // on focus  change color
+        borderRadius: kBorderRadiusAll,
+      ),
+      // on focus  change colov
       focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-              color: kSecondaryColor, width: kWidthOfInputBoarder),
-          borderRadius: kBorderRadiusAll),
-      //color changes when user enters wrong information,
+          borderRadius: kBorderRadiusAll,
+          borderSide: const BorderSide(color: kSecondaryColor)),
 
       errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
