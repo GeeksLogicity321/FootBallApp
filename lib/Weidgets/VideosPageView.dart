@@ -32,9 +32,7 @@ class VideosPagaView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: Text('Make Money Making Sports Bets',
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 217, 212, 255),
-                          fontSize: 13.sp)),
+                      style: TextStyle(color: kPrimaryColor, fontSize: 13.sp)),
                 ),
                 const Spacer(),
               ],

@@ -3,16 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 //colors
-const Color kPrimaryColor = Color(0xFF202342);
+const Color kPrimaryColor = Color(0xFF2f80ed);
 
-const Color kSecondaryColor = Color(0xFF252a4a);
+const Color kSecondaryColor = Color(0xFFf4f7fe);
 // const Color kTextBlackColor = Color(0xFF313131);
 const Color kTextHintColor = Colors.grey;
-const Color kTextWhiteColor = Colors.white;
-// const Color kContainerColor = Color(0xFFFFDADA);
+const Color kTextWhiteColor = Colors.black;
+const Color kContainerColor = Color(0xFFf4f7fe);
 const Color kWhiteColor = Colors.white;
-const Color kIconcolor = Colors.white;
-const Color kothercolor = Colors.blue;
+const Color kIconcolor = kPrimaryColor;
+const Color kothercolor = Color.fromARGB(255, 163, 190, 212);
 
 const Color kUnselectedcolor = Colors.grey;
 

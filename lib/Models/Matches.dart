@@ -1,4 +1,6 @@
 class MatchesModel {
+  String? leagueName;
+  String? leagueId;
   int? round;
   String? matchId;
   String? status;
@@ -10,7 +12,9 @@ class MatchesModel {
   String? roundInfo;
 
   MatchesModel(
-      {this.round,
+      {this.leagueName,
+      this.leagueId,
+      this.round,
       this.matchId,
       this.status,
       this.team2,

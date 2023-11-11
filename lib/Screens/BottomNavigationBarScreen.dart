@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:football/Providers/NewsProvider.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/InPay/InPayScreen.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/Matches/MatchesScreen.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/Sports/SportsScreen.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/Statistics/StatisticScreen.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
+import '../Providers/LiveMatchesProvider.dart';
 import '../constant/constants.dart';
 import 'BottomNavigationBarScreens/MatchPage/News/NewsScreen.dart';
 
@@ -19,13 +21,23 @@ class BottomNavigationBarScreen extends StatefulWidget {
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NewsProvider>().callNewsApi(context);
+      context.read<LiveMatchesProvider>().callMatchesApi(context);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> screensList = [
       const MatchesScreen(),
       const SportsScreen(),
       const InPayScreen(),
-      NewsScreen(),
+      const NewsScreen(),
       const StatisticScreen(),
     ];
     return Scaffold(

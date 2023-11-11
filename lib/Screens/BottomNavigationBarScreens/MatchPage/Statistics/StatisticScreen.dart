@@ -137,13 +137,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
                                 Text(
                                   '47%',
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 30.sp),
                                 ),
                                 const Text(
                                   'Wins/day',
-                                  style: TextStyle(color: Colors.white24),
+                                  style: TextStyle(color: Colors.black87),
                                 ),
                               ],
                             )),
@@ -194,20 +194,20 @@ class _StatisticScreenState extends State<StatisticScreen> {
                         Text(
                           '4,8&',
                           style:
-                              TextStyle(color: Colors.white, fontSize: 25.sp),
+                              TextStyle(color: Colors.black, fontSize: 25.sp),
                         ),
                       ],
                     ),
                     const Text(
                       'Avrage /hour',
-                      style: TextStyle(color: Colors.white24),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
                 SizedBox(
                   height: 8.h,
                   child: const VerticalDivider(
-                    color: Colors.white70,
+                    color: Colors.black,
                   ),
                 ),
                 Column(
@@ -223,13 +223,13 @@ class _StatisticScreenState extends State<StatisticScreen> {
                         Text(
                           '4,8&',
                           style:
-                              TextStyle(color: Colors.white, fontSize: 25.sp),
+                              TextStyle(color: Colors.black, fontSize: 25.sp),
                         ),
                       ],
                     ),
                     const Text(
                       'Total /day',
-                      style: TextStyle(color: Colors.white24),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ],
                 )

@@ -30,9 +30,7 @@ class PopularSightPagePageView extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: Text('How To Get Started With Sports Betting',
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 217, 212, 255),
-                          fontSize: 13.sp)),
+                      style: TextStyle(color: kPrimaryColor, fontSize: 13.sp)),
                 ),
                 const Spacer(),
                 Padding(

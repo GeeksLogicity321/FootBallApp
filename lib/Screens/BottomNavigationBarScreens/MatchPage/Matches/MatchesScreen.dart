@@ -30,33 +30,35 @@ class _MatchesScreenState extends State<MatchesScreen> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    context.read<LiveMatchesProvider>().callMatchesApi();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Matchboard',
-              style: TextStyle(
-                  color: kTextWhiteColor,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 1.h,
-            ),
-            SearchField(),
-            SizedBox(height: 2.h),
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                child: Text(
+                  'Matchboard',
+                  style: TextStyle(
+                      color: kTextWhiteColor,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: 1.h,
+              ),
+              SearchField(),
+              SizedBox(height: 2.h),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
@@ -83,8 +85,11 @@ class _MatchesScreenState extends State<MatchesScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 2.h),
-            SizedBox(
+          ),
+          SizedBox(height: 2.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: SizedBox(
               height: 25.h,
               child: PageView.builder(
                   itemCount: 5,
@@ -92,15 +97,21 @@ class _MatchesScreenState extends State<MatchesScreen> {
                     return const MatchesPageViewWeidget();
                   }),
             ),
-            SizedBox(
-              height: 1.h,
-            ),
-            Text('Games',
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Text('Games',
                 style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold)),
-            SizedBox(
-              height: 1.h,
-            ),
-            SizedBox(
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: SizedBox(
               height: 10.h,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -114,14 +125,20 @@ class _MatchesScreenState extends State<MatchesScreen> {
                     );
                   }),
             ),
-            SizedBox(
-              height: 2.h,
-            ),
-            HeadLineWidget(title: 'Live Matches'),
-            SizedBox(
-              height: 1.h,
-            ),
-            SizedBox(
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: HeadLineWidget(title: 'Live Matches'),
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: SizedBox(
               height: 10.h,
               child: Consumer<LiveMatchesProvider>(
                   builder: (_, matchesProvider, __) {
@@ -135,6 +152,8 @@ class _MatchesScreenState extends State<MatchesScreen> {
                         itemCount: matchesProvider.matchesList.length,
                         itemBuilder: (context, index) {
                           return SmallMatchCard(
+                            leagueId:
+                                matchesProvider.matchesList[index].leagueId!,
                             team1Logo:
                                 matchesProvider.matchesList[index].team1!.logo!,
                             team2Logo:
@@ -147,19 +166,49 @@ class _MatchesScreenState extends State<MatchesScreen> {
                         });
               }),
             ),
-            SizedBox(
-              height: 2.h,
-            ),
-            HeadLineWidget(title: 'Matches'),
-            ListView.builder(
-                itemCount: 5,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return const MatchCardWeidget();
-                }),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: HeadLineWidget(title: 'Matches'),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            child: Consumer<LiveMatchesProvider>(
+                builder: (_, matchesProvider, __) {
+              return ListView.builder(
+                  itemCount: matchesProvider.matchesList.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return matchesProvider.isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : MatchCardWeidget(
+                            leagueId:
+                                matchesProvider.matchesList[index].leagueId!,
+                            title:
+                                matchesProvider.matchesList[index].leagueName,
+                            team1Logo:
+                                matchesProvider.matchesList[index].team1!.logo!,
+                            team2Logo:
+                                matchesProvider.matchesList[index].team2!.logo!,
+                            team1Score: matchesProvider
+                                .matchesList[index].score!.fullTime!.team1!,
+                            team2Score: matchesProvider
+                                .matchesList[index].score!.fullTime!.team2!,
+                            team1Name:
+                                matchesProvider.matchesList[index].team1!.name!,
+                            team2Name:
+                                matchesProvider.matchesList[index].team2!.name!,
+                          );
+                  });
+            }),
+          ),
+        ],
       ),
     ));
   }

@@ -20,13 +20,13 @@ class OutLinedBoxWidget extends StatelessWidget {
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                   colors: [
-                      Color.fromARGB(255, 119, 56, 255),
-                      Color.fromARGB(255, 0, 5, 149),
+                      Color.fromARGB(255, 56, 129, 255),
+                      Color.fromARGB(255, 0, 27, 149),
                     ])
               : null,
           border: selected == true
               ? null
-              : Border.all(width: 0.5, color: kWhiteColor),
+              : Border.all(width: 0.5, color: Colors.black),
           borderRadius: BorderRadius.circular(4.w)),
       child: icon == null
           ? Center(child: Text(title))

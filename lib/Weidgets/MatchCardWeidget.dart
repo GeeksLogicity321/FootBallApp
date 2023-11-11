@@ -1,84 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:football/Providers/LiveMatchesProvider.dart';
+import 'package:football/Providers/TeamProvider.dart';
 import 'package:football/Weidgets/outlinedContainer.dart';
 import 'package:football/constant/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
+import '../Screens/BottomNavigationBarScreens/MatchPage/Matches/MatchDetailScreen.dart';
 
 class MatchCardWeidget extends StatelessWidget {
   const MatchCardWeidget({
     super.key,
+    required this.leagueId,
+    required this.team1Logo,
+    required this.team2Logo,
+    required this.team1Score,
+    required this.team2Score,
+    required this.team1Name,
+    required this.team2Name,
+    this.title,
   });
+
+  final String leagueId;
+  final String? title;
+  final String team1Name;
+  final String team2Name;
+  final String team1Logo;
+  final String team2Logo;
+  final dynamic team1Score;
+  final dynamic team2Score;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 1.h),
-      padding: EdgeInsets.symmetric(vertical: 2.h),
-      decoration: BoxDecoration(
-          color: kSecondaryColor, borderRadius: BorderRadius.circular(2.w)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: 2.h, bottom: 2.h),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Football Championship League',
-                style: Theme.of(context).textTheme.bodySmall!,
+    return InkWell(
+      splashColor: Colors.transparent,
+      onTap: () {
+        Navigator.pushNamed(context, MatchDetailScreen.routeName);
+        context.read<TeamProvider>().setSelected(leagueId, context);
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 1.h),
+        padding: EdgeInsets.symmetric(vertical: 2.h),
+        decoration: BoxDecoration(
+            color: kSecondaryColor, borderRadius: BorderRadius.circular(2.w)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 2.h, bottom: 2.h),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title ?? '',
+                  style: Theme.of(context).textTheme.bodySmall!,
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Image.asset(
-                    'Assets/1.png',
-                    height: 10.h,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Flexible(
+                  child: Column(
+                    children: [
+                      Image.network(
+                        team1Logo,
+                        height: 10.h,
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text(
+                        team1Name,
+                        style: Theme.of(context).textTheme.bodySmall!,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      OutLinedBoxWidget(title: '2.42')
+                    ],
                   ),
-                  SizedBox(
-                    height: 1.h,
+                ),
+                Column(
+                  children: [
+                    const Text('Live'),
+                    Text(
+                      '${team1Score.toString()}:${team2Score.toString()}',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge!
+                          .copyWith(
+                              color: kothercolor, fontWeight: FontWeight.bold),
+                    ),
+                    const Text('21:16')
+                  ],
+                ),
+                Flexible(
+                  child: Column(
+                    children: [
+                      Image.network(
+                        team2Logo,
+                        height: 10.h,
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Text(
+                        team2Name,
+                        style: Theme.of(context).textTheme.bodySmall!,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      OutLinedBoxWidget(title: '2.42')
+                    ],
                   ),
-                  Text('Splash FC',
-                      style: Theme.of(context).textTheme.bodySmall!),
-                  SizedBox(
-                    height: 3.h,
-                  ),
-                  OutLinedBoxWidget(title: '2.42')
-                ],
-              ),
-              Column(
-                children: [
-                  const Text('Live'),
-                  Text(
-                    '0:0',
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: kothercolor, fontWeight: FontWeight.bold),
-                  ),
-                  const Text('21:16')
-                ],
-              ),
-              Column(
-                children: [
-                  Image.asset(
-                    'Assets/pngegg.png',
-                    height: 10.h,
-                  ),
-                  SizedBox(
-                    height: 1.h,
-                  ),
-                  Text('Splash FC',
-                      style: Theme.of(context).textTheme.bodySmall!),
-                  SizedBox(
-                    height: 3.h,
-                  ),
-                  OutLinedBoxWidget(title: '2.42')
-                ],
-              ),
-            ],
-          )
-        ],
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:football/Models/Matches.dart';
 import 'package:football/utilities/ApiFunctions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
 class LiveMatchesProvider extends ChangeNotifier {
   List<MatchesModel> _matchesList = [];
@@ -13,12 +12,16 @@ class LiveMatchesProvider extends ChangeNotifier {
 
   get selected => _selected;
 
-  callMatchesApi() async {
-    isLoading = true;
-    notifyListeners();
-    _matchesList = await ApiServices().fetchMatches();
-    isLoading = false;
-    notifyListeners();
+  callMatchesApi(BuildContext context) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      _matchesList = await ApiServices().fetchMatches(context);
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   void setSelected(int id) {

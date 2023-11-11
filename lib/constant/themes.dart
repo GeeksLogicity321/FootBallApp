@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 
 class CustomTheme {
   var lightTheme = ThemeData.light(useMaterial3: true).copyWith(
-    scaffoldBackgroundColor: kPrimaryColor,
+    scaffoldBackgroundColor: kWhiteColor,
     primaryColor: kPrimaryColor,
     primaryIconTheme: const IconThemeData(color: kIconcolor),
 
@@ -14,9 +14,9 @@ class CustomTheme {
       secondary: kSecondaryColor,
     ),
     tabBarTheme: const TabBarTheme(
-        labelColor: kPrimaryColor,
+        labelColor: kTextWhiteColor,
         indicatorColor: kPrimaryColor,
-        // dividerColor: ,
+        dividerColor: kSecondaryColor,
         unselectedLabelColor: kTextHintColor),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -31,7 +31,7 @@ class CustomTheme {
           color: kTextWhiteColor, fontSize: 10.sp, fontWeight: FontWeight.w700),
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,
+      backgroundColor: kPrimaryColor,
       centerTitle: false,
       titleTextStyle: TextStyle(
           fontSize: 15.sp,
@@ -48,7 +48,7 @@ class CustomTheme {
     //input decoration theme for all our the app
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: kPrimaryColor,
-      selectedItemColor: kothercolor,
+      selectedItemColor: Colors.white,
       unselectedItemColor: kUnselectedcolor,
       type: BottomNavigationBarType.fixed,
       elevation: 0,
