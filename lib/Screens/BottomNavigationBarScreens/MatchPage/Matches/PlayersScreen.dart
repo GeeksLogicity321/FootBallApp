@@ -13,68 +13,73 @@ class PlayersScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Image.asset(
-                    'Assets/pngegg.png',
-                    // height: 10.h,
-                  ),
-                ),
-                Expanded(
-                  child: Image.asset(
-                    'Assets/pngegg.png',
-                    // height: 10.h,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Expanded(
+            //       child: Image.asset(
+            //         'Assets/pngegg.png',
+            //         // height: 10.h,
+            //       ),
+            //     ),
+            //     Expanded(
+            //       child: Image.asset(
+            //         'Assets/pngegg.png',
+            //         // height: 10.h,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             Consumer<TeamProvider>(builder: (_, teamProvider, __) {
-              return teamProvider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : Row(
-                      children: [
-                        Flexible(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: teamProvider.team1.length,
-                              itemBuilder: (context, index) {
-                                final currentindexProvider =
-                                    teamProvider.team1[index];
-                                return SizedBox(
-                                  height: 10.h,
-                                  child: PlayersTiles(
-                                    title:
-                                        '${currentindexProvider.firstName}  ${currentindexProvider.lastName}',
-                                    shirtNum:
-                                        currentindexProvider.shirtNumber ?? 0,
-                                  ),
-                                );
-                              }),
-                        ),
-                        Flexible(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: teamProvider.team1.length,
-                              itemBuilder: (context, index) {
-                                final currentindexProvider =
-                                    teamProvider.team1[index];
-                                return SizedBox(
-                                  height: 10.h,
-                                  child: PlayersTiles(
-                                    title:
-                                        '${currentindexProvider.firstName}  ${currentindexProvider.lastName}',
-                                    shirtNum:
-                                        currentindexProvider.shirtNumber ?? 0,
-                                  ),
-                                );
-                              }),
-                        ),
-                      ],
-                    );
+              if (teamProvider.isLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (teamProvider.team1.isEmpty ||
+                  teamProvider.team2.isEmpty) {
+                return Center(
+                  child: Text('something went wrong please try again'),
+                );
+              } else {
+                return Row(
+                  children: [
+                    Flexible(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: teamProvider.team1.length,
+                          itemBuilder: (context, index) {
+                            final currentindexProvider =
+                                teamProvider.team1[index];
+                            return SizedBox(
+                              height: 10.h,
+                              child: PlayersTiles(
+                                title:
+                                    '${currentindexProvider.firstName}  ${currentindexProvider.lastName}',
+                                shirtNum: currentindexProvider.shirtNumber ?? 0,
+                              ),
+                            );
+                          }),
+                    ),
+                    Flexible(
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: teamProvider.team1.length,
+                          itemBuilder: (context, index) {
+                            final currentindexProvider =
+                                teamProvider.team1[index];
+                            return SizedBox(
+                              height: 10.h,
+                              child: PlayersTiles(
+                                title:
+                                    '${currentindexProvider.firstName}  ${currentindexProvider.lastName}',
+                                shirtNum: currentindexProvider.shirtNumber ?? 0,
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
+                );
+              }
             })
           ],
         ),

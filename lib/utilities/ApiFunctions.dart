@@ -70,7 +70,7 @@ class ApiServices {
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(response.body);
 
-        return NewsDetailModel.fromJson(jsonResponse);
+        return NewsDetailModel.fromJson(jsonResponse['data']);
       } else {
         throw Exception(
             'Error cannot connect to Matches Apis ${response.statusCode}');

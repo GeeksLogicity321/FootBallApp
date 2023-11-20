@@ -22,10 +22,8 @@ class EventProvider extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      await Future.delayed(const Duration(seconds: 5));
 
-      final Uri url = Uri.parse(
-          ApiConstants.event + context.read<TeamProvider>().selected!);
+      final Uri url = Uri.parse(ApiConstants.event + _selected!);
 
       final response = await http.get(
         url,

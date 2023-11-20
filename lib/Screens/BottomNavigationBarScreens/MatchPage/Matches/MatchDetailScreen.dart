@@ -21,8 +21,8 @@ class _MatchDetailScreenState extends State<MatchDetailScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<EventProvider>().callEventApi(context);
-      // context.read<CommentaryProvider>().callCommentaryApi(context);
-      // context.read<TeamProvider>().callTeamApi(context);
+      context.read<CommentaryProvider>().callCommentaryApi(context);
+      context.read<TeamProvider>().callTeamApi(context);
     });
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:football/Screens/BottomNavigationBarScreen.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/Matches/MatchDetailScreen.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/News/NewsDetailScreen.dart';
+import 'package:football/Screens/SplashScreen.dart';
 
 Map<String, WidgetBuilder> namedRoutes = {
   // '/': (context) => const SplashScreen(),
@@ -9,7 +10,7 @@ Map<String, WidgetBuilder> namedRoutes = {
       const BottomNavigationBarScreen(),
   MatchDetailScreen.routeName: (context) => const MatchDetailScreen(),
   NewsDetailScreen.routeName: (context) => const NewsDetailScreen(),
-  // SpecificTopicScreen.routename: (context) => const SpecificTopicScreen(),
+  SplashScreen.routeName: (context) => const SplashScreen(),
   // TermsOfUseScreen.routeName: (context) => const TermsOfUseScreen(),
   // CopyRightScreen.routeName: (context) => const CopyRightScreen(),
   // PrivacyPolicyScreen.routeName: (context) => const PrivacyPolicyScreen(),

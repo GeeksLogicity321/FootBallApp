@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football/Providers/EventProvider.dart';
 import 'package:football/Providers/LiveMatchesProvider.dart';
 import 'package:football/Providers/TeamProvider.dart';
 import 'package:football/Weidgets/outlinedContainer.dart';
@@ -6,12 +7,13 @@ import 'package:football/constant/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../Providers/CommentaryProvider.dart';
 import '../Screens/BottomNavigationBarScreens/MatchPage/Matches/MatchDetailScreen.dart';
 
 class MatchCardWeidget extends StatelessWidget {
   const MatchCardWeidget({
     super.key,
-    required this.leagueId,
+    required this.matchid,
     required this.team1Logo,
     required this.team2Logo,
     required this.team1Score,
@@ -21,7 +23,7 @@ class MatchCardWeidget extends StatelessWidget {
     this.title,
   });
 
-  final String leagueId;
+  final String matchid;
   final String? title;
   final String team1Name;
   final String team2Name;
@@ -36,7 +38,8 @@ class MatchCardWeidget extends StatelessWidget {
       splashColor: Colors.transparent,
       onTap: () {
         Navigator.pushNamed(context, MatchDetailScreen.routeName);
-        context.read<TeamProvider>().setSelected(leagueId, context);
+        context.read<EventProvider>().setSelected(matchid, context);
+        context.read<CommentaryProvider>().setSelected(matchid, context);
       },
       child: Container(
         margin: EdgeInsets.only(top: 1.h),

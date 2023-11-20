@@ -152,8 +152,8 @@ class _MatchesScreenState extends State<MatchesScreen> {
                         itemCount: matchesProvider.matchesList.length,
                         itemBuilder: (context, index) {
                           return SmallMatchCard(
-                            leagueId:
-                                matchesProvider.matchesList[index].leagueId!,
+                            matchid:
+                                matchesProvider.matchesList[index].matchId!,
                             team1Logo:
                                 matchesProvider.matchesList[index].team1!.logo!,
                             team2Logo:
@@ -188,8 +188,8 @@ class _MatchesScreenState extends State<MatchesScreen> {
                             child: CircularProgressIndicator(),
                           )
                         : MatchCardWeidget(
-                            leagueId:
-                                matchesProvider.matchesList[index].leagueId!,
+                            matchid:
+                                matchesProvider.matchesList[index].matchId!,
                             title:
                                 matchesProvider.matchesList[index].leagueName,
                             team1Logo:

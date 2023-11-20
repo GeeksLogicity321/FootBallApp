@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:football/Providers/CommentaryProvider.dart';
+import 'package:football/Providers/EventProvider.dart';
 import 'package:football/Providers/TeamProvider.dart';
 import 'package:football/Screens/BottomNavigationBarScreens/MatchPage/Matches/MatchDetailScreen.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +11,14 @@ import '../constant/constants.dart';
 class SmallMatchCard extends StatelessWidget {
   const SmallMatchCard({
     super.key,
-    required this.leagueId,
+    required this.matchid,
     required this.team1Logo,
     required this.team2Logo,
     required this.team1Score,
     required this.team2Score,
   });
 
-  final String leagueId;
+  final String matchid;
   final String team1Logo;
   final String team2Logo;
   final dynamic team1Score;
@@ -27,7 +29,8 @@ class SmallMatchCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, MatchDetailScreen.routeName);
-        context.read<TeamProvider>().setSelected(leagueId, context);
+        context.read<EventProvider>().setSelected(matchid, context);
+        context.read<CommentaryProvider>().setSelected(matchid, context);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 2.w),

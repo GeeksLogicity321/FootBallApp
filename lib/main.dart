@@ -7,6 +7,7 @@ import 'package:football/Providers/NewsDetailProvider.dart';
 import 'package:football/Providers/NewsProvider.dart';
 import 'package:football/Providers/TeamProvider.dart';
 import 'package:football/Screens/BottomNavigationBarScreen.dart';
+import 'package:football/Screens/SplashScreen.dart';
 import 'package:football/constant/themes.dart';
 import 'package:football/routes.dart';
 
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: CustomTheme().lightTheme,
           debugShowCheckedModeBanner: false,
-          initialRoute: BottomNavigationBarScreen.routenName,
+          initialRoute: SplashScreen.routeName,
           routes: namedRoutes,
         ),
       );

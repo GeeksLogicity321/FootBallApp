@@ -35,9 +35,9 @@ class TeamProvider extends ChangeNotifier {
       final response = await http.get(
         url,
       );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+      final Map<String, dynamic> jsonResponse = json.decode(response.body);
+      if (jsonResponse['status'] == '200') {
+        // final Map<String, dynamic> jsonResponse = json.decode(response.body);
 
         _team1 = filterTeam(jsonResponse, TeamEnum.team1);
         _team2 = filterTeam(jsonResponse, TeamEnum.team2);
@@ -46,11 +46,15 @@ class TeamProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       } else {
+        isLoading = false;
+        notifyListeners();
         throw Exception(
-            'Error cannot connect to MatchesLineup Apis ${response.statusCode}');
+            'Error cannot connect to MatchesLineup Apis ${jsonResponse['status']}');
       }
     } catch (e) {
       errorSnackbar(context, e.toString());
+      isLoading = false;
+      notifyListeners();
       rethrow;
     }
   }

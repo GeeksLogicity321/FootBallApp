@@ -24,8 +24,7 @@ class CommentaryProvider extends ChangeNotifier {
       notifyListeners();
       await Future.delayed(const Duration(seconds: 5));
 
-      final Uri url = Uri.parse(
-          ApiConstants.commentary + context.read<TeamProvider>().selected!);
+      final Uri url = Uri.parse(ApiConstants.commentary + _selected!);
 
       final response = await http.get(
         url,
@@ -39,10 +38,14 @@ class CommentaryProvider extends ChangeNotifier {
         isLoading = false;
         notifyListeners();
       } else {
+        isLoading = false;
+        notifyListeners();
         throw Exception(
             'Error cannot connect to Commentary Apis ${response.statusCode}');
       }
     } catch (e) {
+      isLoading = false;
+      notifyListeners();
       errorSnackbar(context, e.toString());
       rethrow;
     }
